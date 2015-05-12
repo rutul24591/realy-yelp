@@ -26,6 +26,7 @@ module.exports.getLogout = function(req, res) {
 	return res.redirect('/');
 }
 
+
 module.exports.postUser = function(req, res) {
 	// check if body is empty
 	if (_.isEmpty(req.body)) {
