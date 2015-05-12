@@ -10,6 +10,9 @@ var env = require("../config/environment")
 	, crypto = require('crypto')
 ;
 
+var Guser ;
+var Gbusinesses; 
+var GuserId;
 // encryption algorithm
 var algo = 'md5';
 
@@ -88,8 +91,11 @@ module.exports.postLogin = function(req, res) {
 		}
 		if (user.email === username && user.password === password) {
 			res.locals.userName = user.first_name;
+			Guser = user.first_name;
 			res.locals.businesses = user.businesses;
+			Gbusinesses = user.businesses;
 			res.locals.userId = user._id;
+			GuserId = user._id;
 			res.render('Home');
 			return;
 		} else {
@@ -98,4 +104,12 @@ module.exports.postLogin = function(req, res) {
 			return;
 		}
 	});
+}
+
+module.exports.getHomePage = function(req , res){
+	res.locals.userName = Guser;
+	res.locals.businesses = Gbusinesses;
+	res.locals.userId = GuserId;
+	res.render('Home');
+	return;
 }
